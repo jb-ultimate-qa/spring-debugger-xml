@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="importedConfig1Bean13" class="com.mytests.spring.springdebuggerxml.beans.Bean13">
+        <qualifier value="bean13"/>
+    </bean>
+
+    <!-- multiple qualifiers: Spring uses the latest for autowiring, IDEA recognizes only first  -->
+    <bean id="importedConfigQualifierBean12_3" class="com.mytests.spring.springdebuggerxml.beans.Bean12">
+        <qualifier value="qualifier3"/>
+        <qualifier value="qualifier4"/>
+        <qualifier value="qualifier5"/>
+    </bean>
+
+</beans>

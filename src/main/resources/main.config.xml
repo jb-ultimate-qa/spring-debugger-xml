@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="lazy.config.xml"/>
+    <import resource="imported.*"/>
+
+    <bean id="mainConfigBean1" class="com.mytests.spring.springdebuggerxml.beans.Bean1">
+    </bean>
+    <!-- prototype -->
+    <bean id="mainConfigPrototypeBean2" scope="prototype" class="com.mytests.spring.springdebuggerxml.beans.Bean2">
+    </bean>
+    <!-- primary -->
+    <bean id="mainConfigPrimaryBean3" primary="true" class="com.mytests.spring.springdebuggerxml.beans.Bean3">
+    </bean>
+    <bean id="mainConfigBean32" primary="false" class="com.mytests.spring.springdebuggerxml.beans.Bean3">
+    </bean>
+    <!-- lazy -->
+    <bean id="mainConfigLazyBean4" lazy-init="true" class="com.mytests.spring.springdebuggerxml.beans.Bean4">
+    </bean>
+    <!-- abstract -->
+    <!-- child bean is not resolved -->
+    <bean id="mainConfigAbstractBean6" abstract="true" class="com.mytests.spring.springdebuggerxml.beans.Bean6">
+    </bean>
+    <bean id="mainConfigChidBean61" parent="mainConfigAbstractBean6">
+    </bean>
+
+    <!-- autowire-candidate -->
+    <!-- doesn't have the corresponding attribute in debugger-->
+    <bean id="mainConfigAutowireCandidateBean81" autowire-candidate="false" class="com.mytests.spring.springdebuggerxml.beans.Bean8">
+    </bean>
+
+    <!-- init-method / destroy-method -->
+    <bean id="mainConfigInitDestroyBean9"
+          class="com.mytests.spring.springdebuggerxml.beans.Bean9"
+          init-method="init"
+          destroy-method="destroy">
+    </bean>
+
+    <!-- factory-method (static) -->
+    <bean id="mainConfigStaticFactoryBean10"
+          class="com.mytests.spring.springdebuggerxml.beans.Bean10Factory"
+          factory-method="createStatic">
+    </bean>
+
+    <!-- factory-bean + factory-method (instance) -->
+    <!-- produced bean is shown as not loaded -->
+    <bean id="mainConfigBean11Factory" class="com.mytests.spring.springdebuggerxml.beans.Bean11Factory"/>
+    <bean id="mainConfigInstanceFactoryBean11"
+          factory-bean="mainConfigBean11Factory"
+          factory-method="createInstance">
+    </bean>
+
+    <!-- depends-on -->
+    <bean id="mainConfigDependsOnBean14" depends-on="mainConfigBean1" class="com.mytests.spring.springdebuggerxml.beans.Bean14">
+    </bean>
+
+    <!-- qualifier -->
+    <bean id="mainConfigQualifierBean12_1" class="com.mytests.spring.springdebuggerxml.beans.Bean12">
+        <qualifier value="qualifier1"/>
+    </bean>
+    <bean id="mainConfigQualifierBean12_4" class="com.mytests.spring.springdebuggerxml.beans.Bean12">
+        <qualifier type="com.mytests.spring.springdebuggerxml.beans.MyQualifier1"/>
+    </bean>
+    <bean id="mainConfigQualifierBean12_5" class="com.mytests.spring.springdebuggerxml.beans.Bean12">
+        <qualifier type="com.mytests.spring.springdebuggerxml.beans.MyQualifier2" value="customQualifier2"/>
+    </bean>
+    <bean id="mainConfigQualifierBean12_6" class="com.mytests.spring.springdebuggerxml.beans.Bean12">
+        <qualifier type="com.mytests.spring.springdebuggerxml.beans.MyQualifier3">
+            <attribute key="attr1" value="customQualifier3Attr1"/>
+            <attribute key="attr2" value="customQualifier3Attr2"/>
+        </qualifier>
+    </bean>
+
+</beans>
